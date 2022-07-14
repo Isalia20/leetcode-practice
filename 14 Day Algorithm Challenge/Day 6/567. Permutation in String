@@ -1,0 +1,39 @@
+class Solution:
+    def compare_freq_tables(self, s1_map, s2_map):
+        for i in s1_map:
+            if s1_map[i] != s2_map.get(i, 0):
+                return False
+        return True
+
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        if len(s1) > len(s2):
+            return False
+
+        # Create frequency dictionary for s1 string
+        s1_map = {}
+        for i in s1:
+            if i in s1_map:
+                s1_map[i] += 1
+            else:
+                s1_map[i] = 1
+
+        window_size = len(s1)
+        s2_map = {}
+        # Loop over other elements in list otherwise
+        l = r = 0
+        while r < len(s2):
+            while (r<l+window_size):
+                if s2[r] in s2_map:
+                    s2_map[s2[r]] += 1
+                else:
+                    s2_map[s2[r]] = 1
+
+                r += 1
+            
+            if self.compare_freq_tables(s1_map, s2_map):
+                return True
+            # Remove the first element
+            s2_map[s2[l]] -= 1
+            l += 1
+
+        return self.compare_freq_tables(s1_map, s2_map)
