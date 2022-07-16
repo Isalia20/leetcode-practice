@@ -1,0 +1,28 @@
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if root is None:
+            return None
+        
+        queue = []
+        queue.append((root,0))
+        dummy = Node(0, root)
+        
+        while queue:
+            root, level = queue.pop(0)
+            
+            
+            
+            if root.left is not None:
+                queue.append((root.left, level + 1)) #TODO change 1 
+            if root.right is not None:
+                queue.append((root.right, level + 1))
+            
+            #print(queue)
+            if len(queue) == 0:
+                continue
+                
+            next_root, next_level = queue[0]
+            if level == next_level:
+                root.next = next_root
+            
+        return dummy.left
