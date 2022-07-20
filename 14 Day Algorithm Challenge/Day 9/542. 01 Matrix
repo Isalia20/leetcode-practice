@@ -1,0 +1,33 @@
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        # Retrieve location of 1
+        queue = []
+        for row in range(len(mat)):
+            for col in range(len(mat[0])):
+                if mat[row][col] == 0:
+                    queue.append((row,col,0))
+        
+        mat_final = mat.copy()
+        
+        for row in range(len(mat_final)):
+            for col in range(len(mat_final[0])):
+                mat_final[row][col] = -10
+        
+        
+        while queue:
+            row, col, distance = queue.pop(0)
+            if mat_final[row][col] != -10:
+                continue
+                
+            mat_final[row][col] = distance
+            
+            if row > 0:
+                queue.append((row - 1,col, distance + 1))
+            if col > 0:
+                queue.append((row, col - 1, distance + 1))
+            if row < len(mat) - 1:
+                queue.append((row + 1, col, distance + 1))
+            if col < len(mat[0]) - 1:
+                queue.append((row, col + 1, distance + 1))
+        return mat_final
+        
