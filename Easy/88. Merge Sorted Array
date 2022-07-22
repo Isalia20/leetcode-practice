@@ -1,0 +1,37 @@
+class Solution:
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        """
+        Do not return anything, modify nums1 in-place instead.
+        """
+        if m == 0:
+            for i in range(n):
+                nums1[i] = nums2[i]
+            return 
+        elif n == 0:
+            return
+        
+        pointer_one = m - 1
+        pointer_two = n - 1
+        right = m + n - 1  # This is for the end of the array
+        
+        #(pointer_two == - 1 or
+        
+        while pointer_one >= 0 or pointer_two >= 0:
+            if pointer_one > -1 and pointer_two > -1:
+                if nums1[pointer_one] >= nums2[pointer_two]:
+                    nums1[right] = nums1[pointer_one]
+                    pointer_one -= 1
+                else:
+                    nums1[right] = nums2[pointer_two]
+                    pointer_two -= 1
+                    
+            elif pointer_one == -1:
+                nums1[right] = nums2[pointer_two]
+                pointer_two -= 1
+            elif pointer_two == -1:
+                nums1[right] = nums1[pointer_one]
+                pointer_one -= 1
+                
+            right -= 1
+        
+        return
