@@ -1,0 +1,19 @@
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        left_sum = 0
+        right_sum = 0
+        for i in range(1,len(nums)):
+            right_sum += nums[i]
+        pointer = 0
+        
+        while pointer < len(nums):
+            
+            if left_sum == right_sum:
+                return pointer
+            
+            pointer += 1
+            if pointer == len(nums):
+                return -1 
+            left_sum += nums[pointer - 1]
+            right_sum -= nums[pointer]
+            
