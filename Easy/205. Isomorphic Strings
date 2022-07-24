@@ -1,0 +1,15 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        
+        letter_map_1 = {}
+        letter_map_2 = {}
+        
+        for i in range(len(s)):
+            if (t[i] in letter_map_1 or s[i] in letter_map_2) and (letter_map_1.get(t[i],s[i]) != s[i] or letter_map_2.get(s[i],t[i]) != t[i]):
+                return False
+            
+            letter_map_1[t[i]] = s[i]
+            letter_map_2[s[i]] = t[i]
+            
+        return True
+        
