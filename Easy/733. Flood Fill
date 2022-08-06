@@ -1,0 +1,28 @@
+class Solution: 
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        if image[sr][sc] == color:
+            return image
+        
+        
+        original_color = image[sr][sc]
+        queue = []
+        queue.append((sr,sc))
+        max_row = len(image)
+        max_col = len(image[0])
+        
+        while queue:
+            
+            sr,sc = queue.pop(0)
+            
+            if image[sr][sc] == original_color:
+                image[sr][sc] = color
+            
+            if sr + 1 < max_row and image[sr+1][sc] == original_color:
+                queue.append((sr + 1, sc))
+            if sc + 1 < max_col and image[sr][sc + 1] == original_color:
+                queue.append((sr, sc + 1))
+            if sr - 1 >= 0 and image[sr - 1][sc] == original_color:
+                queue.append((sr - 1, sc))
+            if sc - 1 >= 0 and image[sr][sc - 1] == original_color:
+                queue.append((sr, sc - 1))
+        return image
