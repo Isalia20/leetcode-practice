@@ -1,0 +1,20 @@
+class Solution(object):
+    def tribonacci(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        if n == 0:
+            return 0
+        
+        arr = []
+        arr.append(0)
+        arr.append(1)
+        arr.append(1)
+        
+        i = 3
+        while i <= n:
+            arr.append(arr[i - 1] + arr[i - 2] + arr[i - 3])
+            i += 1
+        
+        return arr[-1]
