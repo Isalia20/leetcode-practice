@@ -1,0 +1,27 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 0:
+            return 0
+        elif len(nums) == 2:
+            return max(nums[0], nums[1])
+        elif len(nums) == 1:
+            return nums[0]
+        
+        nums_second = nums[1:]
+        nums = nums[:-1]
+        nums.insert(0, 0)
+        nums.insert(0, 0)
+        
+        
+        for i in range(len(nums)):
+            if i >= 2:
+                nums[i] = max(nums[i - 2] + nums[i], nums[i - 1])
+
+        nums_second.insert(0,0)
+        nums_second.insert(0,0)
+                
+        for i in range(len(nums_second)):
+            if i >= 2:
+                nums_second[i] = max(nums_second[i - 2] + nums_second[i], nums_second[i - 1])
+                
+        return max(nums[-1], nums_second[-1])
