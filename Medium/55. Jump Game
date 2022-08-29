@@ -1,0 +1,15 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        if len(nums) == 1:
+            return True
+        
+        left = len(nums) - 2
+        right = len(nums) - 1
+        while left >= 0:
+            if right <= left + nums[left]:
+                right = left
+                left = right - 1
+            else:
+                left -= 1
+        return right - 1 == left        
+
