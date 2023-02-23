@@ -24,7 +24,6 @@ public:
             int length_of_q = q.size();
             int i = 0;
             while (i < length_of_q){
-                cout << "Came here" << endl;
                 TreeNode* root_node = *q.front();
                 q.pop();
                 if (i == length_of_q - 1){
